@@ -6,13 +6,13 @@ static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Iosevka:size=12" };
+static const char *fonts[]          = { "Iosevka:size=14" };
 static const char dmenufont[]       = "Iosevka:size=13";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#ffffff";
-static const char col_cyan[]        = "#ffcb20";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -28,9 +28,11 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,           -1 },
-	//{ "Emacs",     NULL,       NULL,       0,            0,           0 },
-	{ "QuteBrowser",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gimp",         NULL,       NULL,            0,       0,           -1 },
+	{ "Emacs",        NULL,       NULL,            0,       0,           -1 },
+	//{ "st",		  NULL,       "pulsemixer",    0,       1,           -1 },
+	// { "st",		  NULL,       "screenkey",     0,       1,           -1 },
+	{ "sowon",	  NULL,       NULL,            0,       0,           -1 },
 };
 
 /* layout(s) */
@@ -62,38 +64,49 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run",  NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *emacs[]  = { "emacs", NULL };
-static const char *qutebrowser[] = { "qutebrowser", NULL};
-static const char *record[] = { "/home/csode/scripts/record.sh", NULL};
-static const char *webcam[] = { "/home/csode/scripts/webcam.sh", NULL};
-static const char *screenshot[] = { "/home/csode/scripts/fullscreen.sh", NULL};
-static const char *region[] = { "/home/csode/scripts/screenshot.sh", NULL};
-static const char *boomer[] = { "/home/csode/packages/bin/boomer", NULL};
-static const char *sowon[] = { "/home/csode/scripts/sowon", NULL};
+static const char *browser[] = { "firefox", NULL};
+static const char *record[] = { "/home/xsoder/scripts/record", NULL};
+static const char *screenshot[] = { "/home/xsoder/scripts/fullscreen", NULL};
+static const char *region[] = { "/home/xsoder/scripts/screenshot", NULL};
+static const char *boomer[] = { "/home/xsoder/packages/bin/boomer", NULL};
+static const char *sowon[] = { "/home/xsoder/scripts/timer", NULL};
+static const char *script_reader[] = { "/home/xsoder/scripts/master", NULL};
+static const char *cmd_history[] = { "/home/xsoder/scripts/history-term", NULL};
+static const char *url_history[] = { "/home/xsoder/scripts/url-term", NULL};
+static const char *audio[] = { "/home/xsoder/scripts/audio", NULL};
+static const char *screen_key[] = { "/home/xsoder/scripts/screenkey", NULL};
+static const char *win_screenshot[] = {"/home/xsoder/scripts/win-screen-shot", NULL};
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = emacs } },
-	{ MODKEY,                       XK_b,      spawn,          {.v = qutebrowser } },
+	{ MODKEY,                       XK_b,      spawn,          {.v = browser } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-    { MODKEY,                       XK_r,      spawn,          {.v = record } },
-    { MODKEY|ShiftMask,             XK_r,      spawn,          {.v = webcam } },
+    	{ MODKEY,                       XK_r,      spawn,          {.v = record } },
+    	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = url_history } },
+    	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = audio } },
+    	{ MODKEY,                       XK_o,      spawn,          {.v = script_reader } },
+    	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = cmd_history } },
 	{ MODKEY,                       XK_s,      spawn,          {.v = screenshot } },
-	{ MODKEY,                       XK_t,      spawn,          {.v = sowon } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = region } },
+	{ MODKEY,                       XK_t,      spawn,          {.v = sowon } },
+	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = screen_key } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = win_screenshot } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
+	//{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_z,      spawn,          {.v = boomer} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
-    { MODKEY,                       XK_f,      togglefullscreen,  {0} },
+    	{ MODKEY,                       XK_f,      togglefullscreen,  {0} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
