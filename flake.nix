@@ -113,6 +113,7 @@
             
             # Image libraries
             imlib2
+            ncurses
             
             # Debugging and development
             gdb
