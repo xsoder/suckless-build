@@ -52,7 +52,7 @@
         dmenu-custom = buildSuckless {
           pname = "dmenu-custom";
           version = "5.4";
-          src = ./dmenu-5.4;
+          src = ./dmenu;
           meta.description = "Dynamic menu for X (customized with center patch)";
         };
         
@@ -61,6 +61,7 @@
           pname = "st-custom";
           version = "0.9.2";
           src = ./st;
+          extraBuildInputs = [ pkgs.imlib2 ];
           meta.description = "Simple terminal implementation for X";
         };
         
@@ -107,6 +108,12 @@
             freetype
             harfbuzz
             
+            # Fonts
+            iosevka
+            
+            # Image libraries
+            imlib2
+            
             # Debugging and development
             gdb
             valgrind
@@ -121,7 +128,7 @@
             echo "================================"
             echo ""
             echo "Available projects:"
-            echo "  - dmenu-5.4/"
+            echo "  - dmenu/"
             echo "  - st/"
             echo "  - dwm/"
             echo ""
