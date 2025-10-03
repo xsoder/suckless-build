@@ -61,7 +61,7 @@
           pname = "st-custom";
           version = "0.9.2";
           src = ./st;
-          extraBuildInputs = [ pkgs.imlib2 ];
+          extraBuildInputs = [ pkgs.imlib2 pkgs.ncurses];
           meta.description = "Simple terminal implementation for X";
         };
         
