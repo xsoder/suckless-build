@@ -52,7 +52,7 @@
         dmenu-custom = buildSuckless {
           pname = "dmenu-custom";
           version = "5.4";
-          src = ./dmenu-5.4;
+          src = ./dmenu;
           meta.description = "Dynamic menu for X (customized with center patch)";
         };
         
@@ -128,7 +128,7 @@
             echo "================================"
             echo ""
             echo "Available projects:"
-            echo "  - dmenu-5.4/"
+            echo "  - dmenu/"
             echo "  - st/"
             echo "  - dwm/"
             echo ""
