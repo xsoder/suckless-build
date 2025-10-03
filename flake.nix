@@ -133,7 +133,7 @@
             echo "================================"
             echo ""
             echo "Available projects:"
-            echo "  - dmenu-5.4/"
+            echo "  - dmenu/"
             echo "  - st/"
             echo "  - dwm/"
             echo ""
