@@ -12,7 +12,7 @@
         pkgs = import nixpkgs { inherit system; };
         
         # Helper function to build suckless software
-        buildSuckless = { pname, version, src, extraBuildInputs ? [], meta ? {} }: 
+        buildSuckless = { pname, version, src, extraBuildInputs ? [], extraNativeBuildInputs ? [], meta ? {} }: 
           pkgs.stdenv.mkDerivation {
             inherit pname version src;
             
@@ -26,7 +26,7 @@
             
             nativeBuildInputs = with pkgs; [
               pkg-config
-            ];
+            ] ++ extraNativeBuildInputs;
             
             prePatch = ''
               sed -i "s@/usr/local@$out@" config.mk
@@ -52,7 +52,7 @@
         dmenu-custom = buildSuckless {
           pname = "dmenu-custom";
           version = "5.4";
-          src = ./dmenu;
+          src = ./dmenu-5.4;
           meta.description = "Dynamic menu for X (customized with center patch)";
         };
         
@@ -61,7 +61,7 @@
           pname = "st-custom";
           version = "0.9.2";
           src = ./st;
-          extraBuildInputs = [ pkgs.imlib2 pkgs.ncurses];
+          extraBuildInputs = with pkgs; [ imlib2 ncurses ];
           meta.description = "Simple terminal implementation for X";
         };
         
@@ -113,7 +113,6 @@
             
             # Image libraries
             imlib2
-            ncurses
             
             # Debugging and development
             gdb
@@ -129,7 +128,7 @@
             echo "================================"
             echo ""
             echo "Available projects:"
-            echo "  - dmenu/"
+            echo "  - dmenu-5.4/"
             echo "  - st/"
             echo "  - dwm/"
             echo ""
