@@ -32,6 +32,11 @@
               sed -i "s@/usr/local@$out@" config.mk
             '';
             
+            # Set HOME for tic command (needed for st terminfo compilation)
+            preBuild = ''
+              export HOME=$TMPDIR
+            '';
+            
             makeFlags = [
               "PREFIX=$(out)"
               "CC=${pkgs.stdenv.cc.targetPrefix}cc"
