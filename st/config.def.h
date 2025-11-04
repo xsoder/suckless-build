@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "IosevkaNerdFont:pixelsize=26:antialias=true:autohint=true";
+static char *font = "Ubuntu mono:pixelsize=26:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
     /*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true",
@@ -121,18 +121,17 @@ float alpha = 0.3;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
     /* 8 normal colors */
-    "#2e3436", "#a40000", "#4e9a06", "#c4a000", "#3465a4", "#75507b", "#34a0a4",
-    "#babdb9",
+    "#161616", "#f44747", "#40ff40", "#cd950c",
+    "#3a3a8f", "#cdaa7d", "#72d9cf", "#ffffff",
 
     /* 8 bright colors */
-    "#555753", "#ef2929", "#8ae234", "#fce94f", "#729fcf", "#ad7fa8", "#72d9cf",
-    "#eeeeec",
+    "#7f7f7f", "#ff6666", "#66ff66", "#ffdf6b",
+    "#7070ff", "#e3cfa8", "#8ff6e2", "#f0f0f0",
 
     [255] = 0,
 
     /* more colors can be added after 255 to use with DefaultXX */
-    "#cccccc", "#555555", "#e4e4ef", /* default foreground colour */
-    "#181818",                       /* default background colour */
+    "#ffffff", "#161616", "#40ff40", /* default foreground, background, cursor */
 };
 
 /*
